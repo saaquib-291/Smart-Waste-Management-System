@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Waste Management — Collection Routes">
+  <title>SmartWaste — Routes</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div class="page-header-row">
+          <div>
+            <h1 class="page-title">Collection Routes</h1>
+            <p class="page-subtitle">Manage waste collection routes and schedules</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddRoute()">+ Add Route</button>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="table-card">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Route Name</th>
+                  <th>Schedule Days</th>
+                  <th>Start Time</th>
+                  <th>Bins Assigned</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="routes-table">
+                <tr><td colspan="6"><div class="loading-overlay"><div class="spinner"></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Route Modal -->
+  <div class="modal-backdrop" id="route-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="route-modal-title">Add New Route</h3>
+        <button class="modal-close" onclick="closeModal('route-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="route-form">
+          <input type="hidden" id="route-edit-id">
+          <div class="form-group">
+            <label>Route Name</label>
+            <input type="text" class="form-input" id="route-name" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Schedule Days</label>
+              <input type="text" class="form-input" id="route-days" placeholder="e.g. Mon,Wed,Fri" required>
+            </div>
+            <div class="form-group">
+              <label>Start Time</label>
+              <input type="time" class="form-input" id="route-time" required>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('route-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveRoute()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/routes.js"></script>
+</body>
+</html>

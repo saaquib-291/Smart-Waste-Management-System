@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Waste Management System — Dashboard Overview">
+  <title>SmartWaste — Dashboard</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="page-header">
+        <div class="page-header-row">
+          <div>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">Real-time waste management overview</p>
+          </div>
+          <div>
+            <span class="text-muted" id="current-time" style="font-size:0.8125rem;"></span>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <!-- Stats -->
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Total Bins</span>
+              <div class="stat-icon green">🗑️</div>
+            </div>
+            <div class="stat-value" id="stat-total-bins">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Avg Fill Level</span>
+              <div class="stat-icon blue">📈</div>
+            </div>
+            <div class="stat-value" id="stat-avg-fill">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Active Complaints</span>
+              <div class="stat-icon amber">⚠️</div>
+            </div>
+            <div class="stat-value" id="stat-complaints">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Today's Collections</span>
+              <div class="stat-icon purple">🚛</div>
+            </div>
+            <div class="stat-value" id="stat-collections">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Week's Waste (kg)</span>
+              <div class="stat-icon green">⚖️</div>
+            </div>
+            <div class="stat-value" id="stat-week-waste">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-label">Critical Bins</span>
+              <div class="stat-icon red">🔴</div>
+            </div>
+            <div class="stat-value" id="stat-critical">—</div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Fill Level Trend</div>
+                <div class="chart-subtitle">Average fill level over last 7 days</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="fillTrendChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">Complaint Breakdown</div>
+                <div class="chart-subtitle">By category</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="complaintChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Waste by Zone chart -->
+        <div class="chart-card mb-6">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Waste Collected by Zone</div>
+              <div class="chart-subtitle">Last 30 days (kg)</div>
+            </div>
+          </div>
+          <div class="chart-container">
+            <canvas id="wasteByZoneChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-card">
+          <div class="chart-header">
+            <div>
+              <div class="chart-title">Bin Locations</div>
+              <div class="chart-subtitle">Color-coded by fill level (Green → Yellow → Red)</div>
+            </div>
+          </div>
+          <div class="map-container" id="bin-map"></div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="table-card">
+          <div class="table-header">
+            <div class="table-title">Recent Activity</div>
+          </div>
+          <div style="padding: 0 22px 22px;">
+            <ul class="activity-feed" id="activity-feed">
+              <li class="loading-overlay"><div class="spinner"></div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

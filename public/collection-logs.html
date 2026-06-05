@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart Waste Management — Collection Logs">
+  <title>SmartWaste — Collection Logs</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="main-content">
+      <header class="page-header">
+        <div class="page-header-row">
+          <div>
+            <h1 class="page-title">Collection Logs</h1>
+            <p class="page-subtitle">Track daily waste collection activity</p>
+          </div>
+          <button class="btn btn-primary" onclick="openAddLog()">+ New Log</button>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="filter-bar">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">From</label>
+            <input type="date" class="form-input" id="filter-from" onchange="loadLogs()">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-size:0.75rem;color:var(--text-muted);margin-bottom:2px;">To</label>
+            <input type="date" class="form-input" id="filter-to" onchange="loadLogs()">
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Route</th>
+                  <th>Driver</th>
+                  <th>Vehicle</th>
+                  <th>Waste (kg)</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="logs-table">
+                <tr><td colspan="8"><div class="loading-overlay"><div class="spinner"></div></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Log Modal -->
+  <div class="modal-backdrop" id="log-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">New Collection Log</h3>
+        <button class="modal-close" onclick="closeModal('log-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="log-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Route</label>
+              <select class="form-select" id="log-route" required></select>
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" class="form-input" id="log-date" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Driver</label>
+              <select class="form-select" id="log-driver" required></select>
+            </div>
+            <div class="form-group">
+              <label>Vehicle</label>
+              <select class="form-select" id="log-vehicle" required></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Waste Collected (kg)</label>
+            <input type="number" step="0.01" class="form-input" id="log-waste" required>
+          </div>
+          <div class="form-group">
+            <label>Notes (optional)</label>
+            <textarea class="form-input" id="log-notes" rows="2"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('log-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveLog()">Save Log</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/collection-logs.js"></script>
+</body>
+</html>
