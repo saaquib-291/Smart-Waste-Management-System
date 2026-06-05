@@ -34,6 +34,8 @@ Built with **Node.js**, **Express**, **Sequelize ORM**, **SQLite**, and a modern
 
 ## 📐 ER Diagram
 
+![Database ER Diagram](docs/er-diagram.jpg)
+
 The database implements the following entities and relationships:
 
 | Entity | Key Attributes |
