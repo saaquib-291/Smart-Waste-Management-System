@@ -194,7 +194,7 @@ async function loadMap() {
     const bins = await API.get('/api/bins');
 
     // Center on average coordinates
-    let avgLat = 25.4358, avgLng = 81.8463;
+    let avgLat = 12.9716, avgLng = 77.5946;
     if (bins.length > 0) {
       avgLat = bins.reduce((s, b) => s + parseFloat(b.lat), 0) / bins.length;
       avgLng = bins.reduce((s, b) => s + parseFloat(b.lng), 0) / bins.length;

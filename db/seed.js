@@ -48,11 +48,11 @@ async function seed() {
 
   // ── 2. Zones ──────────────────────────────
   const zonesData = [
-    { zone_name: 'North Zone', district: 'Civil Lines', zone_type: 'residential' },
-    { zone_name: 'South Zone', district: 'Sadar', zone_type: 'commercial' },
-    { zone_name: 'East Zone', district: 'Kydganj', zone_type: 'residential' },
-    { zone_name: 'West Zone', district: 'Kareli', zone_type: 'industrial' },
-    { zone_name: 'Central Zone', district: 'Chowk', zone_type: 'commercial' },
+    { zone_name: 'North Zone', district: 'Yelahanka', zone_type: 'residential' },
+    { zone_name: 'South Zone', district: 'Jayanagar', zone_type: 'commercial' },
+    { zone_name: 'East Zone', district: 'Whitefield', zone_type: 'residential' },
+    { zone_name: 'West Zone', district: 'Rajajinagar', zone_type: 'industrial' },
+    { zone_name: 'Central Zone', district: 'Koramangala', zone_type: 'commercial' },
   ];
   const zones = await Zone.bulkCreate(zonesData);
   console.log(`✅ ${zones.length} zones created`);
@@ -60,9 +60,9 @@ async function seed() {
   // ── 3. Bins ───────────────────────────────
   const binTypes = ['general', 'recyclable', 'organic', 'hazardous'];
   const binStatuses = ['active', 'active', 'active', 'maintenance', 'inactive'];
-  // Base coordinates around Prayagraj, India
-  const baseLat = 25.4358;
-  const baseLng = 81.8463;
+  // Base coordinates around Bangalore, India
+  const baseLat = 12.9716;
+  const baseLng = 77.5946;
 
   const binsData = [];
   for (let i = 0; i < 60; i++) {
@@ -97,39 +97,39 @@ async function seed() {
 
   // ── 5. Drivers ────────────────────────────
   const driversData = [
-    { full_name: 'Rajesh Kumar', contact: '9876543210', license_no: 'UP-DL-2020-001234' },
-    { full_name: 'Suresh Yadav', contact: '9876543211', license_no: 'UP-DL-2019-005678' },
-    { full_name: 'Manoj Singh', contact: '9876543212', license_no: 'UP-DL-2021-009012' },
-    { full_name: 'Anil Sharma', contact: '9876543213', license_no: 'UP-DL-2018-003456' },
-    { full_name: 'Vikram Patel', contact: '9876543214', license_no: 'UP-DL-2022-007890' },
-    { full_name: 'Deepak Verma', contact: '9876543215', license_no: 'UP-DL-2020-002345' },
+    { full_name: 'Rajesh Gowda', contact: '9876543210', license_no: 'KA-03-DL-2020-001234' },
+    { full_name: 'Srinivas Murthy', contact: '9876543211', license_no: 'KA-05-DL-2019-005678' },
+    { full_name: 'Manjunath K.', contact: '9876543212', license_no: 'KA-01-DL-2021-009012' },
+    { full_name: 'Anil Kumar', contact: '9876543213', license_no: 'KA-03-DL-2018-003456' },
+    { full_name: 'Vikram Naidu', contact: '9876543214', license_no: 'KA-04-DL-2022-007890' },
+    { full_name: 'Deepak Rao', contact: '9876543215', license_no: 'KA-02-DL-2020-002345' },
   ];
   const drivers = await Driver.bulkCreate(driversData);
   console.log(`✅ ${drivers.length} drivers created`);
 
   // ── 6. Vehicles ───────────────────────────
   const vehiclesData = [
-    { type: 'Compactor Truck', status: 'available', capacity_tonnes: 8.0, plate_number: 'UP-70-AB-1234' },
-    { type: 'Compactor Truck', status: 'available', capacity_tonnes: 8.0, plate_number: 'UP-70-CD-5678' },
-    { type: 'Mini Truck', status: 'available', capacity_tonnes: 3.5, plate_number: 'UP-70-EF-9012' },
-    { type: 'Mini Truck', status: 'on_route', capacity_tonnes: 3.5, plate_number: 'UP-70-GH-3456' },
-    { type: 'Tipper Truck', status: 'available', capacity_tonnes: 12.0, plate_number: 'UP-70-IJ-7890' },
-    { type: 'Tipper Truck', status: 'maintenance', capacity_tonnes: 12.0, plate_number: 'UP-70-KL-2345' },
-    { type: 'Auto Rickshaw', status: 'available', capacity_tonnes: 0.5, plate_number: 'UP-70-MN-6789' },
-    { type: 'Auto Rickshaw', status: 'available', capacity_tonnes: 0.5, plate_number: 'UP-70-OP-0123' },
+    { type: 'Compactor Truck', status: 'available', capacity_tonnes: 8.0, plate_number: 'KA-03-AB-1234' },
+    { type: 'Compactor Truck', status: 'available', capacity_tonnes: 8.0, plate_number: 'KA-05-CD-5678' },
+    { type: 'Mini Truck', status: 'available', capacity_tonnes: 3.5, plate_number: 'KA-01-EF-9012' },
+    { type: 'Mini Truck', status: 'on_route', capacity_tonnes: 3.5, plate_number: 'KA-03-GH-3456' },
+    { type: 'Tipper Truck', status: 'available', capacity_tonnes: 12.0, plate_number: 'KA-04-IJ-7890' },
+    { type: 'Tipper Truck', status: 'maintenance', capacity_tonnes: 12.0, plate_number: 'KA-05-KL-2345' },
+    { type: 'Auto Rickshaw', status: 'available', capacity_tonnes: 0.5, plate_number: 'KA-02-MN-6789' },
+    { type: 'Auto Rickshaw', status: 'available', capacity_tonnes: 0.5, plate_number: 'KA-03-OP-0123' },
   ];
   const vehicles = await Vehicle.bulkCreate(vehiclesData);
   console.log(`✅ ${vehicles.length} vehicles created`);
 
   // ── 7. Collection Routes ──────────────────
   const routesData = [
-    { route_name: 'Route A - Civil Lines Morning', schedule_days: 'Mon,Wed,Fri', start_time: '06:00' },
-    { route_name: 'Route B - Sadar Market', schedule_days: 'Mon,Tue,Wed,Thu,Fri', start_time: '07:00' },
-    { route_name: 'Route C - Kydganj East', schedule_days: 'Tue,Thu,Sat', start_time: '06:30' },
-    { route_name: 'Route D - Kareli Industrial', schedule_days: 'Mon,Wed,Fri', start_time: '08:00' },
-    { route_name: 'Route E - Chowk Central', schedule_days: 'Mon,Tue,Wed,Thu,Fri,Sat', start_time: '05:30' },
-    { route_name: 'Route F - Civil Lines Evening', schedule_days: 'Mon,Wed,Fri', start_time: '16:00' },
-    { route_name: 'Route G - Sadar Residential', schedule_days: 'Tue,Thu,Sat', start_time: '07:30' },
+    { route_name: 'Route A - Yelahanka Morning', schedule_days: 'Mon,Wed,Fri', start_time: '06:00' },
+    { route_name: 'Route B - Koramangala Hub', schedule_days: 'Mon,Tue,Wed,Thu,Fri', start_time: '07:00' },
+    { route_name: 'Route C - Jayanagar South', schedule_days: 'Tue,Thu,Sat', start_time: '06:30' },
+    { route_name: 'Route D - Whitefield Tech Park', schedule_days: 'Mon,Wed,Fri', start_time: '08:00' },
+    { route_name: 'Route E - Rajajinagar Industrial', schedule_days: 'Mon,Tue,Wed,Thu,Fri,Sat', start_time: '05:30' },
+    { route_name: 'Route F - Koramangala Evening', schedule_days: 'Mon,Wed,Fri', start_time: '16:00' },
+    { route_name: 'Route G - Jayanagar Residential', schedule_days: 'Tue,Thu,Sat', start_time: '07:30' },
     { route_name: 'Route H - Mixed Zone Sunday', schedule_days: 'Sun', start_time: '09:00' },
     { route_name: 'Route I - Hazardous Pickup', schedule_days: 'Fri', start_time: '10:00' },
     { route_name: 'Route J - Organic Collection', schedule_days: 'Mon,Wed,Fri', start_time: '06:00' },
