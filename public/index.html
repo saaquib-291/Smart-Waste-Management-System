@@ -9,6 +9,14 @@
 </head>
 <body class="login-page">
 
+  <!-- Theme toggle on login page -->
+  <div class="login-theme-toggle">
+    <button class="theme-toggle" id="login-theme-btn" title="Toggle light/dark theme">
+      <span class="icon-sun">☀️</span>
+      <span class="icon-moon">🌙</span>
+    </button>
+  </div>
+
   <div class="login-card">
     <div class="login-logo">
       <div class="logo-icon">♻️</div>
@@ -39,6 +47,9 @@
 
   <script src="/js/app.js"></script>
   <script>
+    // Theme toggle on login page
+    document.getElementById('login-theme-btn').addEventListener('click', toggleTheme);
+
     // If already logged in, redirect to dashboard
     checkAuth().then(admin => {
       if (admin) window.location.href = '/dashboard.html';

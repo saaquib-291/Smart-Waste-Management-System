@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadActivity();
 });
 
+// Helper to read CSS custom properties for theme-aware chart colors
+function getCSSVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
 // ── Stats ───────────────────────────────────────────
 async function loadStats() {
   try {
@@ -51,6 +56,8 @@ async function loadFillTrend() {
   try {
     const data = await API.get('/api/dashboard/fill-trend');
     const ctx = document.getElementById('fillTrendChart').getContext('2d');
+    const chartText = getCSSVar('--chart-text');
+    const chartGrid = getCSSVar('--chart-grid');
 
     new Chart(ctx, {
       type: 'line',
@@ -60,13 +67,13 @@ async function loadFillTrend() {
           label: 'Avg Fill Level (%)',
           data: data.map(d => d.avg_fill),
           borderColor: '#10b981',
-          backgroundColor: 'rgba(16, 185, 129, 0.1)',
+          backgroundColor: 'rgba(16, 185, 129, 0.08)',
           borderWidth: 2.5,
           fill: true,
           tension: 0.4,
           pointRadius: 4,
           pointBackgroundColor: '#10b981',
-          pointBorderColor: '#0f172a',
+          pointBorderColor: getCSSVar('--bg-card-solid'),
           pointBorderWidth: 2,
         }],
       },
@@ -78,15 +85,15 @@ async function loadFillTrend() {
         },
         scales: {
           x: {
-            grid: { color: 'rgba(148, 163, 184, 0.08)' },
-            ticks: { color: '#64748b', font: { size: 11 } },
+            grid: { color: chartGrid },
+            ticks: { color: chartText, font: { size: 11 } },
           },
           y: {
             min: 0,
             max: 100,
-            grid: { color: 'rgba(148, 163, 184, 0.08)' },
+            grid: { color: chartGrid },
             ticks: {
-              color: '#64748b',
+              color: chartText,
               font: { size: 11 },
               callback: v => v + '%',
             },
@@ -114,7 +121,7 @@ async function loadComplaintBreakdown() {
         datasets: [{
           data: data.map(d => parseInt(d.count)),
           backgroundColor: colors.slice(0, data.length),
-          borderColor: '#0f172a',
+          borderColor: getCSSVar('--bg-card-solid'),
           borderWidth: 3,
         }],
       },
@@ -126,7 +133,7 @@ async function loadComplaintBreakdown() {
           legend: {
             position: 'bottom',
             labels: {
-              color: '#94a3b8',
+              color: getCSSVar('--text-secondary'),
               padding: 16,
               usePointStyle: true,
               pointStyleWidth: 10,
@@ -146,6 +153,8 @@ async function loadWasteByZone() {
   try {
     const data = await API.get('/api/dashboard/waste-by-zone');
     const ctx = document.getElementById('wasteByZoneChart').getContext('2d');
+    const chartText = getCSSVar('--chart-text');
+    const chartGrid = getCSSVar('--chart-grid');
 
     new Chart(ctx, {
       type: 'bar',
@@ -155,11 +164,11 @@ async function loadWasteByZone() {
           label: 'Waste (kg)',
           data: data.map(d => d.waste_kg),
           backgroundColor: [
-            'rgba(16, 185, 129, 0.7)',
-            'rgba(59, 130, 246, 0.7)',
-            'rgba(245, 158, 11, 0.7)',
-            'rgba(168, 85, 247, 0.7)',
-            'rgba(236, 72, 153, 0.7)',
+            'rgba(16, 185, 129, 0.65)',
+            'rgba(59, 130, 246, 0.65)',
+            'rgba(245, 158, 11, 0.65)',
+            'rgba(168, 85, 247, 0.65)',
+            'rgba(236, 72, 153, 0.65)',
           ],
           borderRadius: 6,
           borderSkipped: false,
@@ -174,11 +183,11 @@ async function loadWasteByZone() {
         scales: {
           x: {
             grid: { display: false },
-            ticks: { color: '#64748b', font: { size: 11 } },
+            ticks: { color: chartText, font: { size: 11 } },
           },
           y: {
-            grid: { color: 'rgba(148, 163, 184, 0.08)' },
-            ticks: { color: '#64748b', font: { size: 11 } },
+            grid: { color: chartGrid },
+            ticks: { color: chartText, font: { size: 11 } },
           },
         },
       },
@@ -216,7 +225,7 @@ async function loadMap() {
       const marker = L.circleMarker([parseFloat(bin.lat), parseFloat(bin.lng)], {
         radius: 8,
         fillColor: color,
-        color: '#0f172a',
+        color: getCSSVar('--bg-card-solid'),
         weight: 2,
         opacity: 1,
         fillOpacity: 0.85,

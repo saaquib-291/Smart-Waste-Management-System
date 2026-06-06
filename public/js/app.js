@@ -2,6 +2,23 @@
  * Smart Waste Management System — Shared App Utilities
  */
 
+// ── Theme Management ────────────────────────────────
+function initTheme() {
+  const stored = localStorage.getItem('swm-theme');
+  const theme = stored || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('swm-theme', next);
+}
+
+// Apply theme immediately on script load (prevents flash)
+initTheme();
+
 // ── API Helper ──────────────────────────────────────
 const API = {
   async request(url, options = {}) {
@@ -94,6 +111,12 @@ function initSidebar(activePage) {
       e.preventDefault();
       logout();
     });
+  }
+
+  // Theme toggle button
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', toggleTheme);
   }
 }
 
@@ -222,6 +245,12 @@ function getSidebarHTML() {
       </div>
     </nav>
     <div class="sidebar-footer">
+      <div class="sidebar-footer-actions">
+        <button class="theme-toggle" id="theme-toggle-btn" title="Toggle light/dark theme">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </button>
+      </div>
       <div class="user-card" id="logout-btn" title="Click to logout">
         <div class="user-avatar">A</div>
         <div class="user-info">
